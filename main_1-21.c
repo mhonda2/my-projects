@@ -26,6 +26,7 @@ int main(int argc, const char *argv[])
     }
     else
     {
+      ++spaceSeen;
       while ((c = fgetc(fin)) == ' ')
       {
         ++spaceSeen;
