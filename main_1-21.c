@@ -16,23 +16,25 @@ int main(int argc, const char *argv[])
   if (!open) { exit(1); }
 
   int c;
-  int charSeen = 0;
+  int spaceSeen = 0;
 
   while((c = fgetc(fin)) != EOF)
   {
     if (c != ' ')
     {
       fputc(c, fout);
-      ++charSeen;
     }
     else
     {
-      int spaces = n - (charSeen % n);
-      if (spaces < n)
+      while ((c = fgetc(fin)) == ' ')
       {
-        fputc('\t', fout);
-        charSeen += spaces;
+        ++spaceSeen;
       }
+      int tabs = n / spacesSeen;
+      int spaces = n % spacesSeen;
+      while (tabs-- > 0) { fputc('\t', fout); }
+      while (spaces-- > 0) { fputc(' ', fout); }
+      fputc(c, fout);
     }
   }
 
