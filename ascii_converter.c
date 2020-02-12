@@ -4,7 +4,8 @@
 #include <math.h>
 #include <string.h>
 
-int convert(char* string[]);
+
+int convert(const char* string);
 
 int main(int argc, const char* argv[])
 {
@@ -19,7 +20,7 @@ int main(int argc, const char* argv[])
   // int n;
 
   char* asc = "01000001";
-  printf("%s is %d\n", convert(asc));
+  printf("%s is %d\n", asc, convert(asc));
   // bool success = openfile(argc, argv, &fin, &fout, &n);
   // if (!success) { exit(1); }
   //
@@ -39,10 +40,9 @@ int main(int argc, const char* argv[])
 return 0;
 }
 
-int convert(char* string[])
+int convert(const char* string)
 {
   int decimal = 0;
-  int j = 0;
   int size = strlen(string) - 2;  // skipping extended ascii
   while (size-- >= 0) {
     int i = (string[size] - '0') * pow(2, size);
@@ -50,3 +50,4 @@ int convert(char* string[])
   }
   return decimal;
 }
+
