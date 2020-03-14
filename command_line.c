@@ -8,8 +8,8 @@
 #define ARGC_ERROR 1
 #define FILE_ERROR 2
 
-char* pattern[MAXLINE];
-char* temp[MAXLINE];
+char pattern[MAXLINE];
+char temp[MAXLINE];
 
 memset(pattern, 0, MAXLINE);
 memset(temp, 0, MAXLINE);
@@ -33,8 +33,10 @@ size_t getline_(FILE* fin, char* s, int lim) {
   return s - p;
 }
 
-void* stricpy(char* s, const char* t) {
+char* stricpy(char* s, const char* t) {
+  char* p = s;
   while ((*s++ = islower(*t++)) != '\0') { }
+  return p;
 }
 
 void process_commands(int argc, const char* argv[]) {
@@ -82,7 +84,7 @@ void process_commands(int argc, const char* argv[]) {
 
     while (getline_(fin, line, MAXLINE) > 0) {
       lineno++;
-      bool found_it = strstr(line, pattern) != NULL;
+      bool found_it = strstr(line, ignore_case ? temp : pattern) != NULL;
       if ((!found_it && except) || (found_it && !except)) {
         if (number_lines) {
           printf("%ld: ", lineno);
