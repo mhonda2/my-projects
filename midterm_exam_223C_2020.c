@@ -72,6 +72,7 @@ void square_move(square* sq, double x, double y) // TODO
 }
 void square_expandby(square* sq, double expandby) // TODO
 {
+ //Assuming you want to expand at the center
   sq->ul.x -= (expandby / 2);
   sq->ul.y += (expandby / 2);
   sq->side += expandby;
